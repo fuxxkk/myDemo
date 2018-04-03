@@ -3,10 +3,17 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.2.RELEASE</version>
+        <version>1.5.8.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-  <artifactId>Eureka-Client</artifactId>
+
+    <groupId>com.forezp</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>eureka-client</name>
+    <description>Demo project for Spring Boot</description>
+    <artifactId>Eureka-Client</artifactId>
   
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -15,6 +22,12 @@
     </properties>
     
       <dependencies>
+          <!-- jedis -->
+          <dependency>
+              <groupId>redis.clients</groupId>
+              <artifactId>jedis</artifactId>
+              <version>2.9.0</version>
+          </dependency>
 
           <!-- 德鲁伊连接池 -->
           <dependency>
@@ -32,16 +45,21 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+          <dependency>
+              <groupId>org.springframework.cloud</groupId>
+              <artifactId>spring-cloud-starter-feign</artifactId>
+          </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-        	<groupId>org.aspectj</groupId>
-        	<artifactId>aspectjrt</artifactId>
-        	<version>1.7.2</version>
-        </dependency>
+          <dependency>
+              <groupId>org.aspectj</groupId>
+              <artifactId>aspectjrt</artifactId>
+              <version>1.7.2</version>
+          </dependency>
 
           <!-- SpringBoot的Mybatis启动器 -->
           <dependency>
