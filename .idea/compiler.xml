@@ -8,11 +8,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Eureka-Client" />
         <module name="Eureka-Server" />
+        <module name="eurekaserver" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Eureka-Client" target="1.8" />
       <module name="EurekaServer" target="1.8" />
+      <module name="eurekaserver" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
