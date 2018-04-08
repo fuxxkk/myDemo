@@ -42,4 +42,14 @@ public class MyController {
   public String setRedis(@PathVariable("key")String key,@PathVariable("val")String val) {
     return commonClient.setRedis(key, val);
   }
+
+  @RequestMapping("/getredis/{key}")
+  public String getRedis(@PathVariable("key")String key) {
+    return commonClient.getRedis(key);
+  }
+
+  @RequestMapping("/hello")
+  public String hello() {
+    return commonClient.hello();
+  }
 }
