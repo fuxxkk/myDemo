@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import redis.clients.jedis.Jedis;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class MyController {
     List<TestUser> testUser = testService.getTestUser();
     for (TestUser tu :
             testUser) {
-      System.out.println(tu.getId()+"..."+tu.getName());
+      System.out.println(tu.getId()+"..."+tu.getUsername());
     }
 
     return "Hi"+name+",i am from port"+this.port;
@@ -52,4 +53,6 @@ public class MyController {
   public String hello() {
     return commonClient.hello();
   }
+
+
 }
