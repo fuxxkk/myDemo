@@ -51,7 +51,7 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()//配置安全策略
-            .antMatchers("/loginerror","/login","/js/**","/image/**","/validatecode","/index_error").permitAll()  //"/","/hello"都不用验证
+            .antMatchers(/*"/loginerror","/login","/js/**","/image/**","/validatecode","/index_error"*/"/**").permitAll()  //"/","/hello"都不用验证
             .anyRequest().authenticated() //其余的请求都要验证u
             .and()
             .logout().logoutSuccessHandler(logoutSuccessHandler).logoutUrl("/logout").logoutSuccessUrl("/login").permitAll()//定义logout不需要验证

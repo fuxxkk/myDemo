@@ -13,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
  *@描述: 测试spring security
  **/
 @RestController
-@EnableWebSecurity
 public class SecurityController {
 
 

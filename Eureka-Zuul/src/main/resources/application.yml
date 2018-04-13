@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: Eureka-Zuul #服务名称
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/ #注册中心地址
+server:
+  port: 9996
+zuul:
+  routes:
+    baidu: #随意
+      path: /a/**
+      url: http://www.baidu.com #输入localhost：9996/a/**   就会转发到baidu.com
+    demo:
+      path: /hello/**
+      serviceId: HelloWordService  #你要转发的服务名称
+
+
+
