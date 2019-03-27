@@ -73,6 +73,9 @@ public class Validatecode {
     } catch (final IOException e) {
       e.printStackTrace();
     }
+
+    //TODO 放进redis里
+
     return code;
   }
 

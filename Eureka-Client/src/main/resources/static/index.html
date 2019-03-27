@@ -54,7 +54,7 @@
         width:100px;/*(一定要设置这个值)*/
         height:25px;/*(一定要设置这个值)*/
         margin: auto;
-		
+
         position: absolute;
         left: 3.5px;
 
@@ -111,22 +111,22 @@
 
             $.ajax({
                 type: "POST",
-                contentType:"application/json",
-                url: "HTTP://localhost:8212/login",
-                data:JSON.stringify(data),
+                //contentType:"application/json",
+                url: "HTTP://localhost:9999/login",
+                data:data,     //JSON.stringify(data),
                 dataType : "json",
                 async : true,
                 success: function(data){
-                    window.location.replace("www.baidu.com");
+                    //window.location.replace("www.baidu.com");
                     alert( "登录 " + data.msg );
                 }
             });
         });
 
-        
+
         $("#img1").click(function(){
-            var img = document.getElementById("img1");  
-            img.src = "validatecode?rnd=" + Math.random();        	
+            var img = document.getElementById("img1");
+            img.src = "validatecode?rnd=" + Math.random();
         });
     });
 //    function login(){
@@ -162,7 +162,7 @@
 
                         </div>
                         <div class="d7" style="float:right;width:102px">
-                            <img src="http://10.9.13.20:9999/validatecode" width="100px" height="32px" id="img1" >
+                            <img src="http://localhost:9999/validatecode" width="100px" height="32px" id="img1" >
                         </div>
                     </div>
 
@@ -173,7 +173,7 @@
                 </div>
             </div>
         </div>
-
+        </div>
     </form>
 
 
