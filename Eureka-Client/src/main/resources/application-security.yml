@@ -1,8 +1,0 @@
-
-spring:
-  thymeleaf:
-    prefix: classpath:/webapp/WEB-INF/jsp
-    mode: LEGACYHTML5
-    encoding: utf-8
-    cache: false
-    content-type: text/html
