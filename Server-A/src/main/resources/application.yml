@@ -9,3 +9,8 @@ eureka:
       default-zone: http://localhost:8761/
   instance:
     prefer-ip-address: true
+my:
+  const:
+    clientId: server-a
+    realm: server-a-realm
+    resourceId: server-a-resource
