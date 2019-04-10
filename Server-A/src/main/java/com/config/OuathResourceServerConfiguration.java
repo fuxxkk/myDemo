@@ -1,0 +1,17 @@
+package com.config;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+
+@Configuration
+@EnableResourceServer
+public class OuathResourceServerConfiguration extends ResourceServerConfigurerAdapter {
+
+    @Value("${my.const.resourceId}")
+    private String resourceId;
+
+
+
+}
