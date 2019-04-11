@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -34,12 +35,15 @@ public class OuathAuthorizationServerConfiguration extends AuthorizationServerCo
     @Autowired
     private TokenStore tokenStore;
 
-    @Autowired
-    private UserApprovalHandler userApprovalHandler;
+   /* @Autowired
+    private UserApprovalHandler userApprovalHandler;*/
 
     @Autowired
     @Qualifier("authenticationManagerBean")
     private AuthenticationManager authenticationManager;
+
+    @Value("${my.const.resourceId}")
+    private String resourceId;
 
     /**
      * 实例化一个TokenStore，他的实现是InMemoryTokenStore，会把OAuth授权的token保存在内存中
@@ -55,18 +59,28 @@ public class OuathAuthorizationServerConfiguration extends AuthorizationServerCo
         System.out.println("=====ouath.auth=====");
         clients.inMemory()
                 .withClient(clientId)
-                .authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")//此客户端可以使用的授权类型，默认为空。
-                .authorities("admin")
-                .secret("secret")
+                .resourceIds(resourceId)
+                .scopes("select")
+                .authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit","client_credentials")//此客户端可以使用的授权类型，默认为空。
+                .authorities("client")
+                .secret("123456")
                 .accessTokenValiditySeconds(6000);
     }
 
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-        oauthServer.realm(realm+"/client");
+        oauthServer.allowFormAuthenticationForClients();
     }
 
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+
+        endpoints.allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
+        endpoints
+                .tokenStore(tokenStore)
+                .authenticationManager(authenticationManager);
+    }
 
 
 }

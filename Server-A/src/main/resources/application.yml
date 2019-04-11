@@ -3,14 +3,23 @@ server:
 spring:
   application:
     name: server-a
+
+  #默认用户名和密码
+  security:
+    user:
+      name: admin
+      password: admin
+      roles: admin
+
 eureka:
   client:
     service-url:
       default-zone: http://localhost:8761/
   instance:
     prefer-ip-address: true
+
 my:
   const:
     clientId: server-a
-    realm: server-a-realm
-    resourceId: server-a-resource
+    realm: my_outha_realm
+    resourceId: server-res-a
