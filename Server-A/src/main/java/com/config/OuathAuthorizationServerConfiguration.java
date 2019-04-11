@@ -56,7 +56,6 @@ public class OuathAuthorizationServerConfiguration extends AuthorizationServerCo
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        System.out.println("=====ouath.auth=====");
         clients.inMemory()
                 .withClient(clientId)
                 .resourceIds(resourceId)

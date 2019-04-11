@@ -3,13 +3,18 @@ server:
 spring:
   application:
     name: server-a
-
   #默认用户名和密码
-  security:
-    user:
-      name: admin
-      password: admin
-      roles: admin
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/mydemo?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+      username: root
+      password: 1234
+#  security:
+#    user:
+#      name: admin
+#      password: admin
+#      roles: admin
 
 eureka:
   client:
@@ -23,3 +28,6 @@ my:
     clientId: server-a
     realm: my_outha_realm
     resourceId: server-res-a
+
+mybatis-plus:
+  mapper-locations: classpath*:huang/yong/chang/mapper/mapping/*.xml

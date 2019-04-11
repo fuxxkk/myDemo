@@ -10,3 +10,4 @@ gen
 target
 compiler.xml
 encodings.xml
+.idea/libraries/*.xml
