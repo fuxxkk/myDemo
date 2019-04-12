@@ -5,18 +5,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
-import org.springframework.security.oauth2.provider.approval.ApprovalStore;
-import org.springframework.security.oauth2.provider.approval.TokenApprovalStore;
-import org.springframework.security.oauth2.provider.approval.TokenStoreUserApprovalHandler;
-import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory;
-import org.springframework.security.oauth2.provider.token.TokenStore;
-import rx.annotations.Beta;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 @Configuration
 @EnableWebSecurity
@@ -31,22 +25,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication().withUser("user_1").password("1234").authorities("USER");
     }
 
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-       /* httpSecurity.authorizeRequests().antMatchers("/ouath/**").permitAll()
+
+        httpSecurity.authorizeRequests().antMatchers("/oauth/**","/login/**","/static/pages/**","/resources/**","/static/images/**").permitAll()
                 .anyRequest().authenticated()
-                .and()
-                .formLogin()
                 .and()
                 .logout().permitAll()
                 .and()
-                .csrf().disable();*/
+                .csrf().disable();
 
 
-        httpSecurity.requestMatchers().anyRequest()
+        /*httpSecurity.requestMatchers().anyRequest()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/oauth/*").permitAll();
+                .antMatchers("/oauth/*").permitAll()
+                .and()
+                .formLogin().loginPage("/login").failureUrl("/login?code=").permitAll();*/
+
     }
 
      /*   @Bean

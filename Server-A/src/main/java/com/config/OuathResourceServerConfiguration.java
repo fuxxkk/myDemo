@@ -1,5 +1,6 @@
 package com.config;
 
+import com.config.oauth.AuthExceptionEntryPoint;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,14 +18,13 @@ public class OuathResourceServerConfiguration extends ResourceServerConfigurerAd
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-
+        resources.authenticationEntryPoint(new AuthExceptionEntryPoint());
         resources.resourceId(resourceId).stateless(true);
 
     }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .and()
                 .requestMatchers().anyRequest()
@@ -32,7 +32,10 @@ public class OuathResourceServerConfiguration extends ResourceServerConfigurerAd
                 .anonymous()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/test/*").authenticated();
+                .antMatchers("/test/**").authenticated();
 
     }
+
+
+
 }
