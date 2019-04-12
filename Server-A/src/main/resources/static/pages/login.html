@@ -62,10 +62,15 @@
 <div class="login-container">
     <div class="form-container">
         <p class="title">用户登录</p>
-        <form name="loginForm" method="post" action="/login">
+        <form name="loginForm" method="post" action="/oauth/token">
             <input type="text" name="username" placeholder="用户名"/>
             <br>
             <input type="password" name="password" placeholder="密码"/>
+            <input type="text" name="grant_type" value="password" hidden/>
+            <input type="text" name="scope" value="select" hidden/>
+            <input type="text" name="client_id" value="server-a" hidden/>
+            <input type="text" name="client_secret" value="123456"  hidden/>
+
             <br>
             <button type="submit" class="btn">登 &nbsp;&nbsp; 录</button>
         </form>
