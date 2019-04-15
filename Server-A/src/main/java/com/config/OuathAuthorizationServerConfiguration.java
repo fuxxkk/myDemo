@@ -13,9 +13,14 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.approval.UserApprovalHandler;
+import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+
+import javax.sql.DataSource;
 
 /**
  * /**
@@ -36,6 +41,9 @@ public class OuathAuthorizationServerConfiguration extends AuthorizationServerCo
     @Autowired
     private TokenStore tokenStore;
 
+    @Autowired
+    private DataSource dataSource;
+
    /* @Autowired
     private UserApprovalHandler userApprovalHandler;*/
 
@@ -51,21 +59,31 @@ public class OuathAuthorizationServerConfiguration extends AuthorizationServerCo
      */
     @Bean
     public TokenStore tokenStore() {
-        return new InMemoryTokenStore();
+        return new JdbcTokenStore(dataSource);
     }
 
+    public ClientDetailsService clientDetails() {
+        return new JdbcClientDetailsService(dataSource);
+    }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
+        //储存在内存中
+/*        clients.inMemory()
                 .withClient(clientId)
                 .resourceIds(resourceId)
                 .scopes("select")
                 .authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit","client_credentials")//此客户端可以使用的授权类型，默认为空。
                 .authorities("client")
                 .secret("123456")
-                .accessTokenValiditySeconds(6000);
+                .accessTokenValiditySeconds(6000);*/
+
+
+        //从jdbc中查询token
+        clients.withClientDetails(clientDetails());
     }
+
+
 
 
     @Override
