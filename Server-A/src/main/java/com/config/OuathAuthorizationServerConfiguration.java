@@ -49,13 +49,16 @@ public class OuathAuthorizationServerConfiguration extends AuthorizationServerCo
     @Value("${my.const.realm}")
     private String realm;
 
-/*    @Autowired
-    private TokenStore tokenStore;*/
+    @Autowired
+    private TokenStore tokenStore;
 
     @Autowired
     private DataSource dataSource;
 
-   /* @Autowired
+    @Autowired
+    private JwtAccessTokenConverter jwtAccessTokenConverter;
+
+/*    @Autowired
     private UserApprovalHandler userApprovalHandler;*/
 
     @Autowired
@@ -112,7 +115,7 @@ public class OuathAuthorizationServerConfiguration extends AuthorizationServerCo
                 /** 自定义一些token属性 ***/
                 final Map<String, Object> additionalInformation = new HashMap<>();
                 additionalInformation.put("userName", userName);
-                additionalInformation.put("roles", "admin");
+                additionalInformation.put("roles", "ADMIN");
                 ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInformation);
                 OAuth2AccessToken enhancedToken = super.enhance(accessToken, authentication);
                 return enhancedToken;
@@ -139,9 +142,9 @@ public class OuathAuthorizationServerConfiguration extends AuthorizationServerCo
 
         endpoints.allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
         endpoints
-                .tokenStore(jwtTokenStore())
+                .tokenStore(tokenStore)
                 .authenticationManager(authenticationManager)
-                .accessTokenConverter(jwtAccessTokenConverter());
+                .accessTokenConverter(jwtAccessTokenConverter);
 
     }
 
